@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dating Counter</title>
+  <style>
+    /* Global styles */
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
+    }
+
+    /* Container styles */
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.5rem;
+      color: white;
+      background: #ff7f50;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #ff6347;
+    }
+
+    #datingDuration {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>How long have Ally and I been dating?</h1>
+    <button onclick="showDatingDuration()">Click to find out!</button>
+    <p id="datingDuration"></p>
+  </div>
+
+  <script>
+    // Date the relationship started
+    const startDate = new Date('2024-02-25T00:00:00');
+
+    // Function to calculate and display the duration
+    function showDatingDuration() {
+      const now = new Date();
+      const elapsed = now - startDate;
+
+      const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((elapsed % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((elapsed % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((elapsed % (1000 * 60)) / 1000);
+
+      document.getElementById('datingDuration').innerText =
+        `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
+    }
+
+    // Cycle background images
+    const images = [
+      'images/pic1.jpg',
+      'images/pic2.jpg',
+      'images/pic3.jpg'
+    ];
+
+    let currentImageIndex = 0;
+
+    function changeBackground() {
+      document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+    }
+
+    setInterval(changeBackground, 5000); // Change image every 5 seconds
+    changeBackground(); // Initialize the first background
+  </script>
+</body>
+</html>
